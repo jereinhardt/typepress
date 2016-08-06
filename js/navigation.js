@@ -172,4 +172,44 @@
             
             position = $(this).scrollTop();
         });
+        
+        // Remove inline styling form centered images
+        $("figure.aligncenter").each(function() {
+            $(this).removeAttr("width");
+            $(this).removeAttr("height");
+            //get text value of the style attr
+            var style = $(this).attr("style");   
+            
+            style = "width: 100px";
+            
+            //get starting index of "height and width" styles
+            var wStart = style.indexOf("width");
+            var hStart  = style.indexOf("height");
+            
+            if (wStart >= 0 ) { 
+                //get index of ending semi-colon
+                var wEnd = style.indexOf(";", wStart) + 1;
+                if (wEnd <= 0) {
+                    var rem = style.substr(wStart);
+                } else {
+                    var rem = style.substr(wStart, wEnd);
+                }
+                style = style.replace(rem,"");
+            }
+            
+            if (hStart >= 0 ) { 
+                //reset hStart since width has been deleted
+                hStart  = style.indexOf("height");
+                var hEnd = style.indexOf(";", hStart) + 1;
+                if (hEnd <= 0) {
+                    var rem = style.substr(hStart);
+                } else {
+                    var rem = style.substr(hStart, hEnd);
+                }
+                style = style.replace(rem,"");
+            }
+                       
+            $(this).attr("style", style);
+            
+        });
 } )( jQuery );
