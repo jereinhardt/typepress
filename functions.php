@@ -111,12 +111,29 @@ add_action( 'widgets_init', 'typepress_widgets_init' );
  */
 function typepress_scripts() {
     
-        wp_enqueue_style( 'typepress-local-fonts', get_template_directory_uri() . '/fonts/custom-fonts.css' );
+//        wp_enqueue_style( 'typepress-local-fonts', get_template_directory_uri() . '/fonts/custom-fonts.css' );
 
 	wp_enqueue_style( 'typepress-style', get_stylesheet_uri() );
         
         wp_enqueue_style( 'typepress-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' );
+       
+        //HEADER FONTS
+        //Playfair Display SC
+        wp_enqueue_style( 'typepress-fonts-playfair', 'https://fonts.googleapis.com/css?family=Playfair+Display+SC:400,400italic,700,700italic');
+        //Old standard TT
+        wp_enqueue_style( 'typepress-fonts-old-standard', 'https://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700' );
+        
+        //BODY FONTS 
+        //Vollkorn
+        wp_enqueue_style( 'typepress-fonts-vollkorn', "https://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic" );
+        //Neuton
+        wp_enqueue_style( 'typepress-fonts-neuton', 'https://fonts.googleapis.com/css?family=Neuton:400italic,400,700' );
 
+        //BOTH FONTS
+        //Alegreya
+        wp_enqueue_style( 'typepress-fonts-alegreya', 'https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700,700italic,900,900italic' );
+
+        
 	wp_enqueue_script( 'typepress-navigation', get_template_directory_uri() . '/js/navigation.js', array( 'jquery' ), '20151215', true );
 
 	wp_enqueue_script( 'typepress-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );

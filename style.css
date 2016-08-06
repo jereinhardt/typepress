@@ -558,7 +558,7 @@ a:active {
 
 .main-navigation li {
 	position: relative;
-        font-family:  'IM Fell DW Pica SC';
+        font-family:  'Old Standard TT';
         font-size: 1.2em;
 }
 
@@ -660,7 +660,7 @@ ul.sub-menu.toggled-on {
 }
 
 .main-navigation.toggled ul li {
-    font-family: 'IM Fell DW Pica SC';
+    font-family: 'Old Standard TT';
     width: 90%;
     width: calc(100% - 2em);
     padding: 0.4em 0em;
@@ -1035,14 +1035,14 @@ ul.sub-menu.toggled-on {
 }
 
 .site-title {
-    font-family: 'IM Fell DW Pica SC', serif;
+    font-family: 'Old Standard TT', serif;
     font-size: 2.35em;
     text-align: center;
     
 }
 
 .site-description {
-    font-family: 'IM Fell DW Pica SC', serif;
+    font-family: 'Old Standard TT', serif;
     font-size: 1.4em;
     text-align: center;
     line-height: 1.3em;
@@ -1085,12 +1085,12 @@ ul.sub-menu.toggled-on {
     font-size: 1.6em;
     line-height: 1.55em;
     color: #777;
-    font-family:  'IM Fell DW Pica SC';
+    font-family:  'Old Standard TT';
 }
 
 .site-logo a:hover .site-firstletter,
 .site-logo a:focus .site-firstletter {
-    color: #fff;
+    color: #000;
 }
 
 /*--------------------------------------------------------------
@@ -1142,7 +1142,7 @@ ul.sub-menu.toggled-on {
 .main-menu-title {
     text-align: center;
     font-size: 2em;
-    font-family: 'IM Fell DW Pica SC', serif;
+    font-family: 'Old Standard TT', serif;
     margin: 1.8em auto;
     /*font-family: 'Roboto Slab', serif;*/
 }
@@ -1174,7 +1174,7 @@ ul.sub-menu.toggled-on {
 #main-menu li .list-item-title {
     font-size: 1.6em;
     text-align: center;
-    font-family: 'IM Fell DW Pica SC', serif;
+    font-family: 'Old Standard TT', serif;
     display: block;
     padding: 0.7em 0.3em;
     margin: 0;
@@ -1209,7 +1209,7 @@ ul.sub-menu.toggled-on {
 }
 
 /*--------------------------------------------------------------
-## Posts and pages
+## Posts and Pages
 --------------------------------------------------------------*/
 .sticky {
 	display: block;
@@ -1240,15 +1240,15 @@ ul.sub-menu.toggled-on {
 	margin: 0 0 1.5em;
 }
 
-/*start here*/ 
+    /*entry header*/ 
 
 .entry-header {
     text-align: center;
 }
 
 .entry-title {
-    font-family: "Roboto Slab", serif;
-    font-size: 1.7em;
+    font-family: 'Old Standard TT', serif;
+    font-size: 2em;
     font-weight: 700;
 }
 
@@ -1258,16 +1258,10 @@ ul.sub-menu.toggled-on {
     text-decoration: underline;
 }
 
-.entry-content {
-    font-family: "Lora", serif;
-    font-size: 1.25em;
-}
-
-
-    /*entry meta*/
+        /*entry meta*/
 
 .entry-meta {
-    font-family: "Lora", serif;
+    font-family: 'Old Standard TT', serif;
 }
 
 .entry-meta a {
@@ -1296,6 +1290,7 @@ ul.sub-menu.toggled-on {
     outline: 2px solid #aaa;
     text-align: center;
     padding: 0.7em;
+    font-family: "Old Standard TT", serif;
 }
 
 .more-link:hover,
@@ -1304,59 +1299,31 @@ ul.sub-menu.toggled-on {
     color: #000;
 }
 
-/*--------------------------------------------------------------
-## Content 
---------------------------------------------------------------*/
+    /*entry content*/
 
 .entry-content {
-    font-family: 'Vollkhorn', serif;
+    font-family: 'Neuton', sans-serif;
     font-size: 1.4em;
 }
 
+    /*etnry images*/ 
 
-    /*embdded images*/
-    
 figcaption {
-    font-family: "Roboto Slab", sans-serif;
+    font-family: "Playfair Display SC", sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
 }
 
-figure.aligncenter {
-    margin: 0 -2.5em;
-    width: calc(100% + 5em);
-    position: relative;
-}
-
-figure.aligncenter img {
-    width: 100%;
-}
-
-figure.aligncenter.wp-caption {
-    max-width: none;
-}
-
-figure.aligncenter figcaption {
-    position: absolute;
-    padding: 1em;
-    color: #fafafa;
-    width: 100%;
-    top: 50%;
-    -webkit-transform: translateY(-60%);
-    -ms-transform: translateY(-60%);
-    -o-transform: translateY(-60%);
-    -moz-transform: translateY(-60%);
-    transform: translateY(-60%);
-    font-size: 1.5em;
-}
-
-figure.aligncenter figcaption a {
+figcaption a {
     color: inherit;
     text-decoration: underline;
 }
 
-figure.aligncenter figcaption a:hover,
-figure.aligncenter figcaption a:focus {
+figcaption a:hover,
+figcaption a:focus {
     color: #aaa;
 }
+
 /*--------------------------------------------------------------
 ## Single Page Content
 --------------------------------------------------------------*/
@@ -1430,6 +1397,37 @@ figure.single-post-thumb {
     }
 
 }
+
+    /*embdded images*/
+    
+body.single-post .aligncenter {
+    margin: 0 -2.5em;
+    max-width: none;
+    width: calc(100% + 5em);
+    position: relative;
+}
+
+body.single-post figure.aligncenter img {
+    width: 100%;
+}
+
+body.single-post figure.aligncenter.wp-caption {
+    max-width: none;
+}
+
+/*figure.aligncenter figcaption {
+    position: absolute;
+    padding: 1em;
+    color: #fafafa;
+    width: 100%;
+    top: 50%;
+    -webkit-transform: translateY(-60%);
+    -ms-transform: translateY(-60%);
+    -o-transform: translateY(-60%);
+    -moz-transform: translateY(-60%);
+    transform: translateY(-60%);
+    font-size: 1.5em;
+}*/
 
 /*--------------------------------------------------------------
 ## Comments

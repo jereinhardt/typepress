@@ -22,15 +22,17 @@
 
 <body <?php body_class(); ?>>
  
+                <?php // display site icon or first letter of site title ?>
                 <div class="site-logo"> 
                     <?php $site_title = get_bloginfo( 'name' ); ?>
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"> 
                         <div class="screen-reader-text"> 
                             <?php printf( esc_html__( 'Go to home page of %1$s', 'typepress' ) ); ?>
                         </div>
-                        <?php if ( has_custom_logo() ) { 
-                            the_custom_logo();
-                        } else { ?>
+                        <?php if ( has_site_icon() ) { 
+                            $site_icon = esc_url( get_site_icon_url( 270 ) ); ?>
+                            <img class="site-icon" src="<?php echo $site_icon; ?>" alt="" >
+                        <?php } else { ?>
                             <div class="site-firstletter" aria-hidden="true"> 
                                 <?php echo substr($site_title, 0, 1); ?>
                             </div>
