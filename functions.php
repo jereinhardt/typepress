@@ -128,7 +128,9 @@ function typepress_scripts() {
         wp_enqueue_style( 'typepress-fonts-vollkorn', "https://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic" );
         //Neuton
         wp_enqueue_style( 'typepress-fonts-neuton', 'https://fonts.googleapis.com/css?family=Neuton:400italic,400,700' );
-
+        // Merriweather
+        wp_enqueue_style( 'typress-fonts-merriweather', 'https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic' );
+        
         //BOTH FONTS
         //Alegreya
         wp_enqueue_style( 'typepress-fonts-alegreya', 'https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700,700italic,900,900italic' );

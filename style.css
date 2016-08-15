@@ -30,6 +30,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Navigation
 	## Links
 	## Menus
+        ## Other Navigation
 # Accessibility
 # Alignments
 # Clearings
@@ -932,9 +933,55 @@ ul.sub-menu.toggled-on {
 	width: 50%;
 }
 
+/*--------------------------------------------------------------
+## Other Navigation
+--------------------------------------------------------------*/
 
+.post-navigation {
+    font-family: 'Old Standard TT', sans-serif;
+    font-size: 1.2em;
+}
 
+.post-navigation a {
+    text-decoration: underline;
+    color: #000;
+}
 
+.post-navigation a:hover,
+.post-navigation a:focus {
+    font-weight: 700;
+    color: #000;
+}
+
+.post-navigation a[rel=prev]:hover,
+.post-navigation a[rel=prev]:focus {
+    margin-left: -0.1em;
+}
+
+.post-navigation a[rel=next]:hover,
+.post-navigation a[rel=next]:focus {
+    margin-right: -0.1em;
+}
+
+.post-navigation .nav-next::after,
+.post-navigation .nav-previous::before {
+    font-family: 'FontAwesome';
+    font-size: 1em;
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+}
+
+.post-navigation .nav-previous::before {
+    content: '\f177';
+    margin-right: 0.5em;
+    text-decoration: none;
+}
+
+.post-navigation .nav-next::after {
+    content: '\f178';
+    margin-left: 0.5em;
+}
 
 /*--------------------------------------------------------------
 # Accessibility
@@ -1030,7 +1077,7 @@ ul.sub-menu.toggled-on {
 .site-branding {
     margin-left: 2em;
     margin-right: 2em;
-    margin-top: 5em;
+    margin-top: 3em;
     margin-bottom: 3em;
 }
 
@@ -1115,9 +1162,23 @@ ul.sub-menu.toggled-on {
 --------------------------------------------------------------*/
 
 #content {
-    padding: 0em 2.5em;
+    padding: 2em 2.5em 0em;
     margin: 0 auto;
     max-width: 61.25em;
+}
+
+#content::before {
+    content: "";
+    display: block;
+    margin: -2em 1em 0;
+    height: 2px;
+    background: #333;
+}
+
+@media screen and (min-width: 45em) {
+    #content::before {
+        display: none;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -1143,8 +1204,15 @@ ul.sub-menu.toggled-on {
     text-align: center;
     font-size: 2em;
     font-family: 'Old Standard TT', serif;
-    margin: 1.8em auto;
+    padding: 1.5em 0;
+    margin: 0 auto;
     /*font-family: 'Roboto Slab', serif;*/
+}
+
+@media screen and (min-width: 45em) {
+    .main-menu-title {
+        padding-top: 0.4em;
+    }
 }
 
 #main-menu li {
@@ -1302,8 +1370,8 @@ ul.sub-menu.toggled-on {
     /*entry content*/
 
 .entry-content {
-    font-family: 'Neuton', sans-serif;
-    font-size: 1.4em;
+    font-family: 'Vollkorn', sans-serif;
+    font-size: 1.2em;
 }
 
     /*etnry images*/ 
@@ -1324,6 +1392,85 @@ figcaption a:focus {
     color: #aaa;
 }
 
+/*general content*/
+
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+    font-family: "Old Standard TT", sans-serif;
+    font-weight: 700;
+}
+
+.entry-content h1 {font-size: 2.6em;}
+.entry-content h2 {font-size: 2.1em;}
+.entry-content h3 {font-size: 1.75em;}
+.entry-content h4 {font-size: 1.3em;}
+.entry-content h5 {font-size: 1em;}
+.entry-content h6 {font-size: 0.8em;}
+
+.entry-content a {
+    color: inherit;
+    border-bottom: 3px solid #eee;
+    border-bottom: 3px solid rgba(150,150,150,0.25);
+    box-shadow: inset 0 -5px 0 #eee;
+    box-shadow: inset 0 -5px 0 rgba(150,150,150,0.25);
+}
+
+.entry-content a:hover,
+.entry-content a:focus {
+    border-bottom: 3px solid #333;
+    border-bottom: 3px solid rgba(20,20,20,0.4);
+    box-shadow: inset 0 -5px 0 #333;
+    box-shadow: inset 0 -5px 0 rgba(20,20,20,0.4);
+}
+
+.entry-content a img,
+.entry-content a:hover img,
+.entry-content a:focus img {
+    border: none;
+    box-shadow: none;
+    vertical-align: top;
+}
+
+.entry-content a.more-link {
+    border-bottom: none;
+    box-shadow: none;
+}
+
+.entry-content blockquote {
+    font-family: "Old Standard TT", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    color: #777;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.entry-content blockquote::before,
+.entry-content blockquote::after {
+    font-family: "FontAwesome";
+    color: #d5d5d5;
+    font-size: 0.8em;
+}
+
+.entry-content blockquote::before {
+    content: "\f10d";
+}
+
+.entry-content blockquote::after {
+    content: "\f10e";
+    position: relative;
+    right: 0;
+}
+
+.entry-content dt {
+    font-family: "Old Standard TT", sans-serif;
+    font-weight: 700;
+}
 /*--------------------------------------------------------------
 ## Single Page Content
 --------------------------------------------------------------*/
@@ -1341,11 +1488,19 @@ body.single-post .site-branding {
     margin: 0em;
 }
 
+.single-post .entry-title {
+    font-size: 2.7em;
+}
+
 body.single-post #content {
-    padding: 0 2em;
+    padding: 3em 2em 0;
     width: 100%;
     margin: 0;
     max-width: none;
+}
+
+body.single-post #content::before {
+    display: none;
 }
 
 
@@ -1367,7 +1522,7 @@ figure.single-post-thumb {
     body.single-post {
         padding-left: 2em;
         padding-right: 2em;
-        background-color: #4B1D3F;
+        background-color: #d1d1d1;
         position: relative;
     }
     
@@ -1393,7 +1548,7 @@ figure.single-post-thumb {
     }
     
     body.single-post #content {
-        padding: 0 3.5em;
+        padding: 3em 3.5em 0;
     }
 
 }
@@ -1415,6 +1570,12 @@ body.single-post figure.aligncenter.wp-caption {
     max-width: none;
 }
 
+@media screen and (min-width: 45em) {
+    body.single-post .aligncenter {
+        margin: 0 -2.917em;
+        width: calc(100% + 5.834em);
+    }
+}
 /*figure.aligncenter figcaption {
     position: absolute;
     padding: 1em;
@@ -1440,6 +1601,240 @@ body.single-post figure.aligncenter.wp-caption {
 	display: block;
 }
 
+.comments-area {
+    font-family: "Vollkorn", serif;
+}
+
+.comments-area a:hover,
+.comments-area a:focus {
+    text-decoration: underline;
+    color: #000;
+}
+.comments-title {
+    font-family: "Old Standard TT", sans-serif;
+    font-size: 1.6em;
+    text-align: center;
+    font-weight: 700;
+}
+
+.comments-area .logged-in-as {
+    color: #ccc;
+    font-size: 0.8em;
+    margin: 0em;
+    text-align: center;
+}
+
+.comments-area .logged-in-as a {
+    color: inherit;
+}
+
+
+
+.comments-area .logged-in-as a:last-child {
+    display: none;
+}
+
+.comments-area .nav-next,
+.comments-area .nav-previous {
+    font-family: 'Old Standard TT', sans-serif;
+    font-size: 1.1em;
+    line-height: 1.1em;
+}
+
+.comments-area .nav-next a,
+.comments-area .nav-previous a {
+    outline: 1px solid #000;
+    display: inline-block;
+    padding: 8px;
+    text-align: center;
+    margin-bottom: 2px;
+    margin-top: 1px;
+}
+
+.comments-area .nav-next a {
+    margin-right: 1px;
+}
+
+.comments-area .nav-previous a {
+    margin-left: 1px;
+}
+
+.comments-area .nav-next a:hover,
+.comments-area .nav-next a:focus,
+.comments-area .nav-previous a:hover,
+.comments-area .nav-previous a:focus {
+    outline: 2px solid #000;
+    margin-top: 2px;
+    padding-top: 7px;
+    margin-bottom: 2px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.comments-area .nav-previous a:hover,
+.comments-area .nav-previous a:focus {
+    margin-left: 2px;
+    padding-left: 7px;
+}
+
+.comments-area .nav-next a:hover,
+.comments-area .nav-next a:focus {
+    margin-right: 2px;
+    padding-right: 7px;
+}
+
+.comment-list {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.comment-list ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.comment-body {
+    margin-bottom: 1.5em;
+}
+
+.comment-body::after {
+    content: "";
+    display: block;
+    width: 100%;
+    width:calc(100% - 5em);
+    margin: 0 2.5em;
+    height: 1px;
+    background: #777;
+    margin-top: 1.5em;
+}
+
+.comment-meta {
+    font-family: 'Old Standard TT', sans-serif;
+    position: relative;
+    margin-left: 46px;
+    min-height: 46px;
+}
+
+.comment-meta .avatar {
+    position: absolute;
+    left: -46px;
+    width: 36px;
+    border-radius: 100%;
+}
+
+.comment-author {
+    font-size: 1.5em;
+}
+
+.comment-metadata, 
+.comment-metadata a {
+    font-size: 0.9em;
+    color: #777;
+    font-weight: light;
+}
+
+.comment-content {
+    margin: 0.5em 0em 0.5em 46px;
+    font-size: 1.1em;
+}
+
+@media screen and (min-width: 45em) {
+    .comment-meta {
+        margin-left: 80px;
+        min-height: 65px;
+    }
+    
+    .comment-meta .avatar {
+        left: -80px;
+        width: 65px;
+    }
+    
+    .comment-content {
+        margin-left: 80px;
+    }
+}
+
+.comment-content p {
+    margin: 0;
+}
+
+
+.comment .reply {
+    margin-top: 1em;
+}
+
+.comment .reply a {
+    display: inline-block;
+    border: 1px solid #000;
+    padding: 0.3em;
+    font-family: 'Old Standard TT', sans-serif;
+}
+
+.comment .reply a:hover,
+.comment .reply a:focus {
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+}
+
+.bypostauthor .comment-meta {
+    font-style: italic;
+}
+
+.bypostauthor .avatar {
+    box-sizing: content-box;
+    border: 5px solid #c3c3c3;
+    margin-top: -5px;
+    margin-left: -5px;
+}
+
+.comment-reply-title {
+    font-family: "Old Standard TT", sans-serif;
+    font-size: 1.7em;
+    text-align: center;
+}
+
+.comment-form {
+    font-family: "Old Standard TT", sans-serif;
+    font-size: 1.2em;
+}
+
+.comment-form label:not([for=comment])::after {
+    display: block;
+    content: "";
+    height: 0px;
+    width: 0px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    border-radius: 0px;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border: 1px solid #000;
+}
+
+
+.comment-form input[type=submit] {
+    background: #fff;
+    font-family: 'Old Standard TT';
+    font-size: 1em;
+    color: #000;
+    box-shadow: none;
+    border: 1px solid #000;
+}
+
+.comment-form input[type=submit]:hover,
+.comment-form input[type=submit]:focus {
+    background: #000;
+    color: #fff;
+    text-shadow: none;
+}
 /*--------------------------------------------------------------
 # Infinite scroll
 --------------------------------------------------------------*/
