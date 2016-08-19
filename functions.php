@@ -47,6 +47,7 @@ function typepress_setup() {
             */
         
           set_post_thumbnail_size(800, 345, true);
+          add_image_size('long', 900, 220, array('center','center'));
           add_image_size('typeress-small-thumb-square', 300, 300, true);
 
 	// This theme uses wp_nav_menu() in one location.

@@ -25,7 +25,7 @@ get_header( 'single' ); ?>
                                 '<span class="post-title">%title</span>',
                             'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( "Previous: ", 'typepress' ) . '</span>' . 
                                 '<span class="screen-reader-text">' . __( 'Previous Post:', 'typepress' ) . '</span>' . 
-                                '<span class="port-title">%title</span>'
+                                '<span class="post-title">%title</span>'
                         ) );
 
 			// If comments are open or we have at least one comment, load up the comment template.
