@@ -3,12 +3,12 @@ Theme Name: Typepress
 Theme URI: http://underscores.me/
 Author: Josh Reinhardt
 Author URI: http://joshuaereinhardt.com
-Description: A simple theme for simple, text-based blogs.
+Description: A theme for websites about literature and creative writing.
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: typepress
-Tags:
+Tags: white, one-column, custom-logo, editor-style, footer-widgets, blog
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -1112,6 +1112,10 @@ ul.sub-menu.toggled-on {
     /*pagination*/
 .paging-navigation {
     width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     margin-bottom: 3em;
 }
@@ -1325,8 +1329,16 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
 
 @media screen and (min-width: 45em) {
     .widget-area {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
         display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
         justify-content: center;
         padding: 1.8em;
     }
@@ -1552,8 +1564,10 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
     margin: 0 auto;
     padding: 0 40px;
     max-width: 1060px;
-    -webkit-display: flex;
-    -ms-display: flexbox;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
@@ -1585,6 +1599,10 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
     display: block;
     background: #efefef;
     border: 2px solid #aaa;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
 
@@ -1593,6 +1611,7 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
     color: #000;
     border: 2px solid #000;
     -webkit-transform: translateY(-0.10em);
+    -ms-transform: translateY(-0.10em);
     transform: translateY(-0.10em);
     box-shadow: 0px 0.32em 8px rgba(155, 155, 155, 0.4);
 }
@@ -1645,8 +1664,10 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
     width: 100%;
     max-width: 1060px;
     padding: 4em 40px;
-    -webkit-display: flex;
-    -ms-display: flexbox;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
@@ -1660,8 +1681,15 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
     background: #eee;
     border: 2px solid #777;
     position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: flex-end;
     justify-content: flex-end;
     line-height: 1.7em;
     margin-bottom: 2em;
@@ -1672,8 +1700,15 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
 .custom-menu > li a {
     position: relative;
     height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: flex-end;
     justify-content: flex-end;
 }
 
@@ -1714,6 +1749,10 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
     .custom-menu > li {
         width: 32%;
         margin-bottom: 0;
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
     }
     
@@ -1727,6 +1766,8 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
     
     .custom-menu > li:hover,
     .custom-menu > li:focus {
+        -webkit-transform: translateY(-2em);
+        -ms-transform: translateY(-2em);
         transform: translateY(-2em);
         box-shadow: 0px 10px 10px #aaa;
         box-shadow: 0px 10px 10px rgba(210, 210, 210, 0.9);
@@ -1757,6 +1798,10 @@ ul.page-numbers li a:hover, ul.page-numbers li a:focus {
         border: 2px solid #777;
         border-top: none;
         height: auto;
+        -webkit-transition: max-height 0.3s ease-in;
+        -moz-transition: max-height 0.3s ease-in;
+        -o-transition: max-height 0.3s ease-in;
+        -ms-transition: max-height 0.3s ease-in;
         transition: max-height 0.3s ease-in;
     }
     
@@ -1982,8 +2027,10 @@ figcaption a:focus {
     font-weight: 400;
     font-style: italic;
     color: #777;
-    display: -webkit-flex;
+    display: -webkit-box;
+    display: -moz-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 }
 
@@ -2012,7 +2059,13 @@ figcaption a:focus {
 /*paginated content*/
 
 .page-links {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -2195,19 +2248,6 @@ body.single-post figure.aligncenter.wp-caption {
         width: calc(100% + 8.572em);
     }
 }
-/*figure.aligncenter figcaption {
-    position: absolute;
-    padding: 1em;
-    color: #fafafa;
-    width: 100%;
-    top: 50%;
-    -webkit-transform: translateY(-60%);
-    -ms-transform: translateY(-60%);
-    -o-transform: translateY(-60%);
-    -moz-transform: translateY(-60%);
-    transform: translateY(-60%);
-    font-size: 1.5em;
-}*/
 
 /*--------------------------------------------------------------
 ## Comments
