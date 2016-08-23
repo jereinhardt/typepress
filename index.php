@@ -14,6 +14,7 @@
 
 get_header(); ?>
 
+
         <?php 
         if ( is_home() && is_front_page() && has_nav_menu('main_menu') ) {
             
@@ -36,6 +37,7 @@ get_header(); ?>
           
         }
         ?>
+
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
@@ -63,7 +65,7 @@ get_header(); ?>
 
 			endwhile;
 
-			the_posts_navigation();
+                        typeress_paging_nav();
 
 		else :
 

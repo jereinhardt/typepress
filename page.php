@@ -30,12 +30,14 @@ get_header(); ?>
                     'theme_location' => 'main_menu', 
                     'menu_id' => 'main-menu',
                     'menu_class' => 'main-menu',
-                    'depth' => 1,
+                    'depth' => 0,
                 ) 
             );
           
         }
         ?>
+
+        <?php get_custom_menu(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">

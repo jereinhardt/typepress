@@ -48,6 +48,7 @@ function typepress_setup() {
         
           set_post_thumbnail_size(800, 345, true);
           add_image_size('long', 900, 220, array('center','center'));
+          add_image_size('menu-thumb', 800, 533);
           add_image_size('typeress-small-thumb-square', 300, 300, true);
 
 	// This theme uses wp_nav_menu() in one location.
@@ -73,6 +74,10 @@ function typepress_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+        
+        add_editor_style( array(
+            'inc/editor-style.css',
+        ) );
 }
 endif;
 add_action( 'after_setup_theme', 'typepress_setup' );
@@ -105,6 +110,57 @@ function typepress_widgets_init() {
 		'after_title'   => '</h2>',
 	) );
 }
+
+//only include these extra menues if the user has the CPCM plugin installed
+if ( class_exists('CPCM_Manager') ) {
+    add_action( 'after_setup_theme', 'add_custom_menus' );
+    /**
+     * Register Menus for each page that has a custom menu 
+     *
+     */
+    function add_custom_menus() {
+
+        $menus = array();
+
+        $args = array(
+            'meta_key' => 'has_custom_menu',
+            'meta_value' => '1',
+            'offset' => 0,
+            'post_type' => 'page',
+            'post_status' => 'publish'
+        );
+
+        $pages = get_pages( $args );
+        foreach ( $pages as $page ) {
+            $menu_name  = $page->post_title;
+            $menu_id = str_replace(" ", "_", trim( strtolower($page->post_title) ) );      
+            $menus[$menu_id] = esc_html__( $menu_name, 'typepress' );
+        }
+
+        register_nav_menus( $menus );
+
+    }
+}
+
+/**
+ * Used on page.php to get any registered custom menus
+ */
+
+function get_custom_menu( ) {
+    global $post;
+    $has_custom_menu = get_post_meta($post->ID, 'has_custom_menu', true);
+    $menu_id = str_replace( " ", "_", trim( strtolower( $post->post_title ) ) );
+    if ( $has_custom_menu && has_nav_menu( $menu_id ) ) { 
+        wp_nav_menu( 
+            array( 
+                'theme_location' => $menu_id, 
+                'menu_id' => $menu_id,
+                'menu_class' => 'custom-menu',
+            ) 
+        );      
+    }
+    
+}
 add_action( 'widgets_init', 'typepress_widgets_init' );
 
 /**
@@ -116,26 +172,13 @@ function typepress_scripts() {
 
 	wp_enqueue_style( 'typepress-style', get_stylesheet_uri() );
         
-        wp_enqueue_style( 'typepress-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' );
-       
+        wp_enqueue_style( 'typepress-fontawesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' );       
         //HEADER FONTS
-        //Playfair Display SC
-        wp_enqueue_style( 'typepress-fonts-playfair', 'https://fonts.googleapis.com/css?family=Playfair+Display+SC:400,400italic,700,700italic');
         //Old standard TT
-        wp_enqueue_style( 'typepress-fonts-old-standard', 'https://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700' );
-        
+        wp_enqueue_style( 'typepress-fonts-old-standard', 'https://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700' );      
         //BODY FONTS 
-        //Vollkorn
-        wp_enqueue_style( 'typepress-fonts-vollkorn', "https://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic" );
-        //Neuton
-        wp_enqueue_style( 'typepress-fonts-neuton', 'https://fonts.googleapis.com/css?family=Neuton:400italic,400,700' );
-        // Merriweather
-        wp_enqueue_style( 'typress-fonts-merriweather', 'https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic' );
-        
-        //BOTH FONTS
-        //Alegreya
-        wp_enqueue_style( 'typepress-fonts-alegreya', 'https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700,700italic,900,900italic' );
-
+        //Frank Ruhl Libre
+        wp_enqueue_style( 'typepress-fonts-etc', "https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre:300,400,700" );
         
 	wp_enqueue_script( 'typepress-navigation', get_template_directory_uri() . '/js/navigation.js', array( 'jquery' ), '20151215', true );
 
@@ -146,6 +189,48 @@ function typepress_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'typepress_scripts' );
+
+/**
+ * Create Functionality that allows users custom menu locations on certain pages
+ * then add those custom menue locations to the theme
+ */
+add_action( 'add_meta_boxes', 'add_custom_menu_checkbox' );
+function add_custom_menu_checkbox() {
+	add_meta_box('custom_menu','Typepress Theme Options', 'custom_menu_callback', 'page');
+}
+function custom_menu_callback( $post ) {
+	global $post;
+	$isFeatured=get_post_meta( $post->ID, 'has_custom_menu', true );
+?>
+	
+	<input type="checkbox" name="has_custom_menu" value="1" <?php echo (($isFeatured=='1') ? 'checked="checked"': '');?>/> Create a custom menu for this page
+        <?php if ( !class_exists('CPCM_Manager') ): ?> 
+            <br />This feature will only work if the <a target="_blank" href="https://wordpress.org/plugins/category-posts-in-custom-menu/">Category Posts in Custom Menu</a> plugin is installed.
+        <?php endif; ?>
+<?php
+}
+
+if ( class_exists('CPCM_Manager') ):
+    add_action('save_post', 'save_page_with_custom_menu'); 
+endif;
+function save_page_with_custom_menu($post_id){ 
+    if ( isset($_POST['has_custom_menu']) ) {
+	update_post_meta( $post_id, 'has_custom_menu', $_POST['has_custom_menu']);
+    } else {
+        update_post_meta( $post_id, 'has_custom_menu', 0);
+    }
+}
+
+//Outputs a continued reading button for index content with excerpts
+function typepress_excerpt_more( $post ) {
+    $link = get_permalink( $post->ID );
+    $out  = "<p>";
+    $out .= '<a href="' . $link . '" class="more-link">';
+    $out .= "Continued Here...";
+    $out .= "</a></p>";
+    return $out;
+}
+
 
 class Menu_With_Description extends Walker_Nav_Menu {
     function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
@@ -189,11 +274,11 @@ class Menu_With_Description extends Walker_Nav_Menu {
 
         //thumbnail image output 
 //        $item_output .= ( isset( $args->thumbnail_link ) && $args->thumbnail_link ) ? '<a' . $attributes . '>' : '';
-        $item_output .= apply_filters( 'menu_item_thumbnail' , ( isset( $args->thumbnail ) && $args->thumbnail ) ? get_the_post_thumbnail( $item->object_id , ( isset( $args->thumbnail_size ) ) ? $args->thumbnail_size : 'thumbnail' , $attr ) : '' , $item , $args , $depth );
+        $item_output .= apply_filters( 'menu_item_thumbnail' , ( isset( $args->thumbnail ) && $args->thumbnail ) ? get_the_post_thumbnail( $item->object_id , ( isset( $args->thumbnail_size ) ) ? $args->thumbnail_size : 'menu-thumb' , $attr ) : '' , $item , $args , $depth );
 //        $item_output .= ( isset( $args->thumbnail_link ) && $args->thumbnail_link ) ? '</a>' :'';
         
         // menu description output based on depth
-        $item_output .= ( $args->desc_depth >= $depth ) ? '<br /><span class="sub">' . $item->description . '</span>' : '';
+        $item_output .= ( $args->desc_depth >= $depth ) ? '<p class="item-description">' . $item->description . '</p>' : '';
 
         // close menu link anchor
         $item_output .= '</a>';
@@ -211,12 +296,65 @@ function my_add_menu_descriptions( $args ) {
         $args['desc_depth'] = 0;
         $args['thumbnail'] = true;
         $args['thumbnail_link'] = true;
-        $args['thumbnail_size'] = 'nav_thumb';
+        $args['thumbnail_size'] = 'menu-thumb';
         $args['thumbnail_attt'] = array( 'class' => 'nav_thumb my_thumb' , 'alt' => 'test' , 'title' => 'test' );
-    }
+    } 
     
     return $args;
 }
+
+
+
+function wpb_mce_buttons_2($buttons) {
+    array_unshift($buttons, 'styleselect');
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'wpb_mce_buttons_2');
+
+function my_mce_before_init_insert_formats( $init_array ) {
+    // Define the style_formats array
+    $style_formats = array( 
+        // Each array child is a format with it's own settings
+        array( 
+            'title' => 'Character Name', 
+            'block' => 'p', 
+            'classes' => 'character-name',
+            'wrapper' => false,
+        ),
+        array( 
+            'title' => 'Dialogue', 
+            'block' => 'p', 
+            'classes' => 'dialogue',
+            'wrapper' => false,
+        ),
+        array( 
+            'title' => 'Stage Direction', 
+            'block' => 'p', 
+            'classes' => 'direction',
+            'wrapper' => false,
+        ),
+        array( 
+            'title' => 'Poem Stanza', 
+            'block' => 'div', 
+            'classes' => 'stanza',
+            'wrapper' => true,
+        ),
+        array(
+            'title' => 'Prose Paragraph',
+            'block' => 'p',
+            'classes' => 'prose-para',
+            'wrapper' => false,
+        ),
+    );
+    // Insert the array, JSON ENCODED, into 'style_formats'
+    $init_array['style_formats'] = json_encode( $style_formats ); 
+    
+    return $init_array;
+
+}
+
+// Attach callback to 'tiny_mce_before_init'
+add_filter( 'tiny_mce_before_init', 'my_mce_before_init_insert_formats' );
 
 
 

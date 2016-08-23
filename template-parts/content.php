@@ -33,6 +33,10 @@
 
 	<div class="entry-content">
 		<?php
+                if ( !is_single() && has_excerpt()) {
+                        the_excerpt();
+                        echo typepress_excerpt_more($post);
+                } else {
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
 				wp_kses( __( 'Continued Here... %s', 'typepress' ), array( 'span' => array( 'class' => array() ) ) ),
@@ -43,6 +47,7 @@
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'typepress' ),
 				'after'  => '</div>',
 			) );
+                }
 		?>
 	</div><!-- .entry-content -->
 </article><!-- #post-## -->

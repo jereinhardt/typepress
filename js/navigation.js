@@ -211,5 +211,17 @@
                        
             $(this).attr("style", style);
             
+            
         });
+        
+        $('.custom-menu li').mouseenter(function() {
+            $(this).css("z-index", "1000");
+        });
+        $('.custom-menu li').mouseleave(function() {
+            setTimeout(function() {
+                $(this).css("z-index", "1");
+            }.bind(this), 300);
+        })
+        
+        
 } )( jQuery );
